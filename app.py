@@ -19,10 +19,10 @@ def createNotionTask(token, collectionURL, content):
 @app.route('/create_todo', methods=['GET'])
 def create_todo():
 
-    todo = request.args.get('todo', default=None, type=None)
+    todo = request.args.get('test', default=None, type=None)
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, 'test row')
+    createNotionTask(token_v2, url, todo)
     return f'added test row to Notion'
 
 
