@@ -20,9 +20,10 @@ def createNotionTask(token, collectionURL, content):
 def create_todo():
 
     todo = request.args.get('todo', default=None, type=None)
+    loggin.info(todo)
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, todo) #check snytax 
+    createNotionTask(token_v2, url, todo)
     return f'added {todo} to Notion'
 
 
@@ -30,6 +31,3 @@ if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-
-
-#sample comment for heroku testing
