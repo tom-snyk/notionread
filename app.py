@@ -14,7 +14,7 @@ def createNotionTask(token, collectionURL, content):
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.title = content
+    row.title = "TEST HARD CODE ROW TITLE"
 
 
 @app.route('/create_todo', methods=['GET'])
@@ -24,7 +24,7 @@ def create_todo():
     logging.info(todo)
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, "TEST HARD CODE")
+    createNotionTask(token_v2, url, "TEST HARD CODE TODO")
     return f'added {todo} to Notion'
 
 
