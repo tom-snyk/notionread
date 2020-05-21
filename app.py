@@ -1,4 +1,3 @@
-
 import os
 from notion.client import NotionClient
 from flask import Flask
@@ -19,17 +18,14 @@ def createNotionTask(token, collectionURL, content):
 @app.route('/create_todo', methods=['GET'])
 def create_todo():
 
-    #todo = request.args.get('test', default=None, type=None)
+    todo = request.args.get('todo')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url)#, todo)
-    return f'added test row to Notion'
+    createNotionTask(token_v2, url, todo)
+    return f'added {todo} to Notion'
 
 
 if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-
-
-#sample comment for heroku testing
