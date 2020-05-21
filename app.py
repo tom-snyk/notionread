@@ -24,7 +24,7 @@ def create_todo():
     logging.info(todo)
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, todo)
+    createNotionTask(token_v2, url, "TEST HARD CODE")
     return f'added {todo} to Notion'
 
 
