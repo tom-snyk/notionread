@@ -1,9 +1,10 @@
 
 import os
+import logging
+
 from notion.client import NotionClient
 from flask import Flask
 from flask import request
-
 
 app = Flask(__name__)
 
@@ -20,7 +21,7 @@ def createNotionTask(token, collectionURL, content):
 def create_todo():
 
     todo = request.args.get('todo', default=None, type=None)
-    loggin.info(todo)
+    logging.info(todo)
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
     createNotionTask(token_v2, url, todo)
