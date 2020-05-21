@@ -13,7 +13,7 @@ def createNotionTask(token, collectionURL, content):
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.title = content
+    row.test = content
 
 
 @app.route('/create_todo', methods=['GET'])
