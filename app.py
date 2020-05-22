@@ -32,13 +32,16 @@ def index():
 @app.route('/slack', methods=['GET'])
 def slack():
     #changing for slack paths
-    stitle = request.args.get('stitle')
-    slink = request.args.get('slink')
-    suser = request.args.get('suser')
-    token_v2 = os.environ.get("TOKEN")
-    url = os.environ.get("URL")
-    createNotionTask(token_v2, url, stitle, slink, suser)
-    return f'added {stitle} {slink} {suser} to Notion'
+    if request.headers['zapkey'] !== os.environ.get("ZAPKEY")
+        abort(403)
+    else:
+        stitle = request.args.get('stitle')
+        slink = request.args.get('slink')
+        suser = request.args.get('suser')
+        token_v2 = os.environ.get("TOKEN")
+        url = os.environ.get("URL")
+        createNotionTask(token_v2, url, stitle, slink, suser)
+        return f'added {stitle} {slink} {suser} to Notion'
 
 
 if __name__ == '__main__':
