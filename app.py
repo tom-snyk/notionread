@@ -3,6 +3,7 @@ from notion.client import NotionClient
 from flask import Flask
 from flask import request
 from flask import abort
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def index():
 @app.route('/slack', methods=['GET'])
 def slack():
     #changing for slack paths 
-    if request.headers['zapkey'] == 'test':
+    if  request.headers['zapkey'] == 'test':
         abort(403)
     else:
         stitle = request.args.get('stitle')
