@@ -26,7 +26,7 @@ def index():
     #if seczapkey == headzapkey
     #    return f'slacknotion'
     #return f'bad day for you'
-    abort(401)
+    abort(403)
 
 
 @app.route('/slack', methods=['GET'])
