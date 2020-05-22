@@ -6,9 +6,6 @@ from flask import request
 
 app = Flask(__name__)
 
-seczapkey = os.environ.get("zapkey")
-
-
 def createNotionTask(token, collectionURL, title, link, author):
     # notion
     client = NotionClient(token)
@@ -32,7 +29,7 @@ def slack():
     return f'added {stitle} {slink} {suser} to Notion'
 
 
-if __name__ == '__main__' and request.headers['zapkey'] = seczapkey:
+if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
