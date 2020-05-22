@@ -2,7 +2,7 @@ import os
 from notion.client import NotionClient
 from flask import Flask
 from flask import request
-
+from flask import abort
 
 app = Flask(__name__)
 
@@ -15,6 +15,18 @@ def createNotionTask(token, collectionURL, title, link, author):
     row.title = title
     row.link = link
     row.added = author
+
+
+
+@app.route('/')
+def index():
+    #grab security header
+    #seczapkey = os.environ.get("ZAPKEY")
+    #headzapkey = request.headers['zapkey']
+    #if seczapkey == headzapkey
+    #    return f'slacknotion'
+    #return f'bad day for you'
+    abort(401)
 
 
 @app.route('/slack', methods=['GET'])
@@ -33,3 +45,4 @@ if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
+
