@@ -20,12 +20,12 @@ def createNotionTask(token, collectionURL, title, link):
 @app.route('/slack', methods=['GET'])
 def slack():
     #changing for slack paths
-    name = request.args.get('name')
+    stitle = request.args.get('stitle')
     slink = request.args.get('slink')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, name, slink)
-    return f'added {name} & {slink} to Notion'
+    createNotionTask(token_v2, url, stitle, slink)
+    return f'added {stitle} & {slink} to Notion'
 
 
 if __name__ == '__main__':
