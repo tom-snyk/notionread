@@ -18,25 +18,19 @@ def createNotionTask(token, collectionURL, title, link, author):
     row.added = author
 
 
-
+#403 main page
 @app.route('/')
 def index():
-    #grab security header
-    #seczapkey = os.environ.get("ZAPKEY")
-    #headzapkey = request.headers['zapkey']
-    #if seczapkey == headzapkey
-    #    return f'slacknotion'
-    #return f'bad day for you'
     abort(403)
 
-
+#403 if not using zapkey for security reasons
 @app.route('/slack', methods=['GET'])
-def slack():
-    #changing for slack paths 
+def slack(): 
     seczapkey = os.environ.get("ZAPKEY")
     if  request.headers['zapkey'] != seczapkey:
         abort(403)
     else:
+        #grab different query string params and push to differnt fields
         stitle = request.args.get('stitle')
         slink = request.args.get('slink')
         suser = request.args.get('suser')
