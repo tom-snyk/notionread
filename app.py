@@ -7,7 +7,7 @@ from flask import request
 app = Flask(__name__)
 
 
-def createNotionTask(token, collectionURL, title, link):
+def createNotionTask(token, collectionURL, title, link, author):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL, collection=None, force_refresh=True)
@@ -15,6 +15,7 @@ def createNotionTask(token, collectionURL, title, link):
     row = cv.collection.add_row()
     row.title = title
     row.link = link
+    row.author = author
 
 
 @app.route('/slack', methods=['GET'])
@@ -22,10 +23,11 @@ def slack():
     #changing for slack paths
     stitle = request.args.get('stitle')
     slink = request.args.get('slink')
+    suser = request.args.get('suser')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, stitle, slink)
-    return f'added {stitle} & {slink} to Notion'
+    createNotionTask(token_v2, url, stitle, slink, suser)
+    return f'added {stitle} {slink} {suser} to Notion'
 
 
 if __name__ == '__main__':
