@@ -10,20 +10,20 @@ app = Flask(__name__)
 def createNotionTask(token, collectionURL, content):
     # notion
     client = NotionClient(token)
-    cv = client.get_collection_view(collectionURL)
+    cv = client.get_collection_view(collectionURL, collection=None, force_refresh=True)
+    #adding force_refresh seems to all the added row to be updated
     row = cv.collection.add_row()
     row.title = content
-    row.is_confirmed = True
 
 
-@app.route('/create_todo', methods=['GET'])
-def create_todo():
-
-    todo = request.args.get('todo')
+@app.route('/slack', methods=['GET'])
+def slack():
+    #changing for slack paths
+    name = request.args.get('name')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, todo)
-    return f'added {todo} to Notion'
+    createNotionTask(token_v2, url, name)
+    return f'added {name} to Notion'
 
 
 if __name__ == '__main__':
