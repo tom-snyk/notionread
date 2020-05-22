@@ -7,23 +7,25 @@ from flask import request
 app = Flask(__name__)
 
 
-def createNotionTask(token, collectionURL, content):
+def createNotionTask(token, collectionURL, title, link):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL, collection=None, force_refresh=True)
     #adding force_refresh seems to all the added row to be updated
     row = cv.collection.add_row()
-    row.title = content
+    row.title = title
+    row.link = link
 
 
 @app.route('/slack', methods=['GET'])
 def slack():
     #changing for slack paths
     name = request.args.get('name')
+    slink = request.args.get('slink')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, name)
-    return f'added {name} to Notion'
+    createNotionTask(token_v2, url, name, slink)
+    return f'added {name} & {slink} to Notion'
 
 
 if __name__ == '__main__':
