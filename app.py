@@ -19,7 +19,7 @@ def createNotionTask(token, collectionURL, title, link, author):
 
 
 
-@app.route('/*')
+@app.route('/')
 def index():
     #grab security header
     #seczapkey = os.environ.get("ZAPKEY")
@@ -33,7 +33,8 @@ def index():
 @app.route('/slack', methods=['GET'])
 def slack():
     #changing for slack paths 
-    if  request.headers['zapkey'] != 'kAohdJRHsaQY7YXrkoFzNTHD':
+    seczapkey = os.environ.get("ZAPKEY")
+    if  request.headers['zapkey'] != seczapkey:
         abort(403)
     else:
         stitle = request.args.get('stitle')
