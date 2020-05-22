@@ -15,7 +15,7 @@ def createNotionTask(token, collectionURL, title, link, author):
     row = cv.collection.add_row()
     row.title = title
     row.link = link
-    row.author = author
+    row.added = author
 
 
 @app.route('/slack', methods=['GET'])
