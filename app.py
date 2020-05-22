@@ -18,7 +18,7 @@ def createNotionTask(token, collectionURL, title, link, author):
 
 
 
-@app.route('/')
+@app.route('/*')
 def index():
     #grab security header
     #seczapkey = os.environ.get("ZAPKEY")
