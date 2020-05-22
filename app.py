@@ -11,7 +11,8 @@ app = Flask(__name__)
 def createNotionTask(token, collectionURL, content):
     # notion
     client = NotionClient(token)
-    cv = client.get_collection_view(collectionURL)
+    cv = client.get_collection_view(collectionURL, collection=None, force_refresh=True)
+    #adding force_refresh seems to correct for AttributeError NoneType
     row = cv.collection.add_row()
     row.title = content
 
