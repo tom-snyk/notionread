@@ -31,8 +31,8 @@ def index():
 
 @app.route('/slack', methods=['GET'])
 def slack():
-    #changing for slack paths
-    if request.headers['zapkey'] !== os.environ.get("ZAPKEY")
+    #changing for slack paths 
+    if request.headers['zapkey'] == 'test':
         abort(403)
     else:
         stitle = request.args.get('stitle')
